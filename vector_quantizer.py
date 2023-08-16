@@ -18,7 +18,6 @@ class VectorQuantizer(Layer):
             name="embeddings",
             shape=(self.emb_dim, self.num_emb),
             initializer="uniform",
-            dtype=tf.float32,
             trainable=True
         )
 
@@ -29,7 +28,7 @@ class VectorQuantizer(Layer):
         # Find the nearest embedding for each input vector.
         embedding_indices = self.__nearest_embedding(flatten_inputs)
         encodings = tf.one_hot(embedding_indices, self.num_emb)
-        quantized = tf.matmul(encodings, tf.transpose(self.embeddings))
+        quantized = tf.matmul(encodings, self.embeddings, transpose_b=True)
 
         # Reshape the quantized vector to match the original input shape.
         quantized = tf.reshape(quantized, original_shape)
@@ -41,7 +40,7 @@ class VectorQuantizer(Layer):
 
         # Compute the embedding loss.
         emb_loss = tf.reduce_mean(
-            tf.square(tf.stop_gradient(quantized) - inputs)
+            tf.square(quantized - tf.stop_gradient(inputs))
         )
 
         # Compute the loss.
@@ -66,11 +65,8 @@ class VectorQuantizer(Layer):
 
         return tf.argmin(distances, axis=-1)
 
-    @staticmethod
-    @tf.custom_gradient
-    def __straight_through_estimator(inputs: tf.Tensor):
-        return inputs, lambda dy: dy
 
 if __name__ == "__main__":
     vq = VectorQuantizer(10, 4)
-    vq(tf.random.uniform((5, 12, 12, 4)))
+    vq.build(input_shape=(None, 4))
+

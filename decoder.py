@@ -27,5 +27,5 @@ if __name__ == "__main__":
     decoder.build(input_shape=(128, 7, 7, 64))
     decoder.summary()
     
-    a = decoder(tf.random.normal((1, 7, 7, 64)))
+    a = decoder(tf.random.normal((5, 7, 7, 64)))
     print(a.shape)
