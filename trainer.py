@@ -9,14 +9,12 @@ from vqvae import VQVAE
 
 
 class Trainer(Model):
-    def __init__(self, num_emb: int = 128, emb_dim: int = 16, train_variance: float = 1.0, **kwargs):
+    def __init__(self, vqvae_model: VQVAE, train_variance: float = 1.0, **kwargs):
         super(Trainer, self).__init__(**kwargs)
 
-        self.num_emb = num_emb
-        self.emb_dim = emb_dim
         self.train_variance = train_variance
 
-        self.vqvae = VQVAE(num_emb, emb_dim)
+        self.vqvae = vqvae_model
         
         # Metrics
         self.recon_loss_tracker = tf.keras.metrics.Mean(name="recon_loss")
