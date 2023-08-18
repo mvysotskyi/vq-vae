@@ -5,6 +5,7 @@ Vector Quantizer and VQ-VAE.
 import tensorflow as tf
 from tensorflow.keras.layers import Layer
 
+from tensorflow.xla.experimental import jit_scope
 
 class VectorQuantizer(Layer):
     def __init__(self, num_emb: int, emb_dim: int, beta: float = 0.25, **kwargs):
@@ -58,10 +59,10 @@ class VectorQuantizer(Layer):
         """
         # Compute the L2 distance between each input vector and each embedding.
         distances = (
-            tf.reduce_sum(tf.square(flatten_inputs), axis=1, keepdims=True) + 
-            tf.reduce_sum(tf.square(self.embeddings), axis=0) -
-            2 * tf.matmul(flatten_inputs, self.embeddings)
-        )
+                tf.reduce_sum(tf.square(flatten_inputs), axis=1, keepdims=True) + 
+                tf.reduce_sum(tf.square(self.embeddings), axis=0) -
+                2 * tf.matmul(flatten_inputs, self.embeddings)
+            )
 
         return tf.argmin(distances, axis=-1)
 
@@ -69,4 +70,6 @@ class VectorQuantizer(Layer):
 if __name__ == "__main__":
     vq = VectorQuantizer(10, 4)
     vq.build(input_shape=(None, 4))
+    a = vq(tf.random.normal((2, 2, 2, 4)))
+    print(a)
 

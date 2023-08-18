@@ -1,7 +1,9 @@
+*_in*.py
 in*.py
 *.h5
 *.png
-
+data/
+train*/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

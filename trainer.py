@@ -21,6 +21,9 @@ class Trainer(Model):
         self.vq_loss_tracker = tf.keras.metrics.Mean(name="vq_loss")
         self.loss_tracker = tf.keras.metrics.Mean(name="loss")
 
+    def call(self, inputs):
+        return self.vqvae(inputs)
+    
     def train_step(self, x):
         with tf.GradientTape() as tape:
             x_hat = self.vqvae(x)

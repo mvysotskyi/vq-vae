@@ -3,22 +3,18 @@ VQ-VAE model.
 """
 
 from tensorflow.keras.models import Model
-
-from encoder import Encoder
-from decoder import Decoder
-
 from vector_quantizer import VectorQuantizer
 
 
 class VQVAE(Model):
-    def __init__(self, num_emb: int = 128, emb_dim: int = 16, **kwargs):
+    def __init__(self, encoder: Model, decoder: Model, num_emb: int = 128, emb_dim: int = 16, **kwargs):
         super(VQVAE, self).__init__(**kwargs)
 
         self.num_emb = num_emb
         self.emb_dim = emb_dim
 
-        self.encoder = Encoder(emb_dim)
-        self.decoder = Decoder(emb_dim)
+        self.encoder = encoder
+        self.decoder = decoder
 
         self.vector_quantizer = VectorQuantizer(num_emb, emb_dim)
 

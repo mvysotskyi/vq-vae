@@ -4,7 +4,10 @@ Train VQ-VAE on MNIST dataset.
 
 import tensorflow as tf
 
+from encoder import Encoder
+from decoder import Decoder
 from vqvae import VQVAE
+
 from trainer import Trainer
 
 
@@ -18,7 +21,12 @@ def main():
     x_test_scaled = (x_test / 255.0) - 0.5
 
     # Create trainer
-    model = VQVAE(128, 16)
+    model = VQVAE(
+        Encoder(16),
+        Decoder(16),
+        128,
+        16
+    )
     trainer = Trainer(model)
 
     trainer.compile(optimizer=tf.keras.optimizers.Adam())
