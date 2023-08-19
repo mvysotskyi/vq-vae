@@ -1,6 +1,4 @@
-*_in*.py
-in*.py
-*.h5
+checkpoints
 x*.png
 f*.png
 data/
