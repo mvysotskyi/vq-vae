@@ -1,5 +1,4 @@
 x*.png
-f*.png
 data/
 train*/
 # Byte-compiled / optimized / DLL files

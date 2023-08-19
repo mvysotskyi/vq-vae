@@ -2,6 +2,12 @@
 
 This repository contains an implementation of the Vector Quantized Variational Autoencoder (VQ-VAE) applied to the reconstruction of MNIST digits and the Oxford Flowers dataset. The VQ-VAE is a powerful generative model that combines elements of both Variational Autoencoders (VAEs) and Vector Quantization. This README provides an overview of the repository, its structure, and instructions for running the experiments.
 
+# TODO
+
+- [ ] Restore `mnist_infer.py`.
+- [ ] Finish `pixelcnn`.
+- [ ] Use more powerful encoder-decoder architectures.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
