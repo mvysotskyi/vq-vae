@@ -66,7 +66,7 @@ To run the code in this repository, you need to have the following dependencies 
 
 ## Results
 
-The results of the experiments, including saved model checkpoints, reconstructed images, and evaluation metrics, will be saved in the `reconstructions/` directory. You can use these results to analyze the performance of the VQ-VAE models on the MNIST and Oxford Flowers datasets.
+The results of the experiments, including saved model checkpoints, reconstructed images, will be saved in the `checkpoints/` and `reconstructions/` directories. You can use these results to analyze the performance of the VQ-VAE models on the MNIST and Oxford Flowers datasets.
 
 1. **MNIST:** The following figure shows the reconstructed MNIST digits using the VQ-VAE model.
 
@@ -80,3 +80,4 @@ The results of the experiments, including saved model checkpoints, reconstructed
 
 - VQ-VAE: https://arxiv.org/abs/1711.00937
 - Keras VQ-VAE Tutorial: https://keras.io/examples/generative/vq_vae/
+- Oxford Flowers Dataset: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/index.html
