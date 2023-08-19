@@ -26,7 +26,7 @@ class ResidualDecoder(tf.keras.Model):
             layers.Conv2DTranspose(
                 filters=self.embedding_dim * 2 ** i,
                 kernel_size=4,
-                strides=1,                
+                strides=2,                
                 padding="same",
                 activation="relu",
                 name=f"conv_{i}"
@@ -35,11 +35,11 @@ class ResidualDecoder(tf.keras.Model):
         ]
 
         self.conv_out = layers.Conv2DTranspose(
-            filters=self.embedding_dim,
+            filters=3,
             kernel_size=3,            
-            strides=1,
+            strides=2,
             padding="same",
-            activation="relu",                        
+            activation="sigmoid",                        
             name="conv_out"
         )
 
@@ -55,8 +55,8 @@ class ResidualDecoder(tf.keras.Model):
 
 if __name__ == '__main__':
     decoder = ResidualDecoder(128, num_layers=3)
-    decoder.build(input_shape=(None, 128, 128, 128))
-    a = decoder(tf.random.normal((1, 128, 128, 128)))
+    decoder.build(input_shape=(None, 16, 16, 128))
+    a = decoder(tf.random.normal((1, 16, 16, 128)))
 
     decoder.summary()
     print(a.shape)
