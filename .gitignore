@@ -1,7 +1,8 @@
 *_in*.py
 in*.py
 *.h5
-*.png
+x*.png
+f*.png
 data/
 train*/
 # Byte-compiled / optimized / DLL files
